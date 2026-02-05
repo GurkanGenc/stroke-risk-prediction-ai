@@ -1,19 +1,32 @@
-def load_raw_data(filepath):
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+scale = StandardScaler()
+
+def load_data(filepath: str) -> pd.DataFrame:
     """Load CSV data into a pandas DataFrame."""
-    pass
+    return pd.read_csv(filepath)
 
-def clean_missing_values(data):
-    """Fill missing values with median values."""
-    pass
+def fill_missing_values_median(data: pd.DataFrame) -> pd.DataFrame:
+    """Fill missing BMI values using the median."""
+    return data.assign(bmi=data['bmi'].fillna(data['bmi'].median()))
 
-def encode_categorical_features(data):
+def encode_categorical_features(data: pd.DataFrame) -> pd.DataFrame:
     """Convert categorical columns to numerical format (one-hot encoding)."""
-    pass
+    return pd.get_dummies(data,
+                          columns=['gender', 'ever_married', 'work_type', 'Residence_type', 'smoking_status'],
+                          drop_first=True)
 
-def scale_numerical_features(data):
+def scale_numerical_features(data: pd.DataFrame) -> pd.DataFrame:
     """Standardize numerical features."""
-    pass
+    numerical_columns = ['age', 'avg_glucose_level', 'bmi']
+    copy_data = data.copy()
 
-def split_features_and_target(data):
+    scaled = scale.fit_transform(copy_data[numerical_columns])
+    copy_data[numerical_columns] = scaled
+    return copy_data
+
+def split_features_and_target(data: pd.DataFrame):
     """Split dataset into features (X) and target (y)."""
-    pass
+    X = data.drop(columns=['stroke'])
+    y = data['stroke']
+    return X, y

@@ -1,5 +1,5 @@
-def split_data_train_val_test(X, y, test_size=0.2, val_size=0.2, random_state=42):
-    """Split the dataset into training, validation, and testing sets, ensuring stratification to maintain class distribution."""
+def split_data_train_test(X, y, test_size=0.2, random_state=42):
+    """Split the dataset into training, and testing sets, ensuring stratification to maintain class distribution."""
     pass
 
 def create_logistic_regression_model():

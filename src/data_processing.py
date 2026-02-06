@@ -6,12 +6,10 @@ scaler = StandardScaler()
 
 def load_data(filepath: str) -> pd.DataFrame:
     """Load CSV data into a pandas DataFrame."""
-
     return pd.read_csv(filepath)
 
 def fill_missing_values_median(data: pd.DataFrame) -> pd.DataFrame:
     """Fill missing BMI values using the median."""
-
     return data.assign(bmi=data['bmi'].fillna(data['bmi'].median()))
 
 def encode_categorical_features(data: pd.DataFrame) -> pd.DataFrame:

@@ -1,6 +1,7 @@
 import data_processing as dp
 import model_training as mt
 import evaluation as ev
+import joblib
 
 def main():
     # Load raw data
@@ -30,6 +31,9 @@ def main():
     
     # Train model
     model = mt.train_logistic_regression_model(model, X_train, y_train)
+
+    # Save the trained model to use on the UI
+    joblib.dump(model, "models/stroke_prediction_model.joblib")
     
     # Generate predictions
     y_pred = ev.get_predictions(model, X_test)

@@ -1,5 +1,5 @@
-from typing import Tuple
 import pandas as pd
+from typing import Tuple
 from sklearn.preprocessing import StandardScaler
 
 scaler = StandardScaler()
@@ -11,7 +11,7 @@ def load_data(filepath: str) -> pd.DataFrame:
 
 def fill_missing_values_median(data: pd.DataFrame) -> pd.DataFrame:
     """Fill missing BMI values using the median."""
-    
+
     return data.assign(bmi=data['bmi'].fillna(data['bmi'].median()))
 
 def encode_categorical_features(data: pd.DataFrame) -> pd.DataFrame:

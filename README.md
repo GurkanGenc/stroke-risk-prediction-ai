@@ -47,14 +47,13 @@ stroke-risk-prediction-ai/
 │   ├── model_training.py
 │   ├── evaluation.py
 │   ├── app.py
-│   └── main.py
+│   ├── main.py
+│   └── models/
+│       ├── stroke_model.joblib
+│       └── feature_schema.joblib
 │
 ├── notebooks/
 │   └── analysis.ipynb
-│
-├── models/
-│   ├── stroke_model.joblib
-│   └── feature_schema.joblib
 │
 ├── requirements.txt
 ├── README.md

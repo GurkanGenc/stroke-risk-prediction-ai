@@ -36,10 +36,28 @@ Author: fedesoriano
 Link: https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset/data
 
 # Project Structure
-data/        → dataset
-src/         → ML pipeline + UI
-notebooks/   → analysis
-models/      → trained models & artifacts
+stroke-risk-prediction-ai/
+│
+├── data/
+│   └── healthcare-dataset-stroke-data.csv
+│
+├── src/
+│   ├── DataProcessing.py
+│   ├── model_training.py
+│   ├── evaluation.py
+│   ├── app.py
+│   └── main.py
+│
+├── notebooks/
+│   └── analysis.ipynb
+│
+├── models/
+│   ├── stroke_model.joblib
+│   └── feature_schema.joblib
+│
+├── requirements.txt
+├── README.md
+└── report.pdf
 
 # Online Demo (Recommended for Recruiters)
 Live App:
@@ -76,15 +94,15 @@ streamlit run src/app.py
 A browser window will automatically.
 
 # Machine Learning Pipeline
-Raw Data
-→ Preprocessing
-→ Encoding
-→ Scaling
-→ Feature Engineering
-→ Model Training
-→ Model Evaluation
-→ Model Saving
-→ Inference via UI
+- Raw Data  
+- Preprocessing  
+- Encoding  
+- Scaling  
+- Feature Engineering  
+- Model Training  
+- Model Evaluation  
+- Model Saving  
+- Inference via UI  
 
 # Limitations
 - Educational dataset

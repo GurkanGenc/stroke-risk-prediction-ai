@@ -36,6 +36,7 @@ Author: fedesoriano
 Link: https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset/data
 
 # Project Structure
+```text
 stroke-risk-prediction-ai/
 │
 ├── data/
@@ -58,6 +59,7 @@ stroke-risk-prediction-ai/
 ├── requirements.txt
 ├── README.md
 └── report.pdf
+```
 
 # Online Demo (Recommended for Recruiters)
 Live App:

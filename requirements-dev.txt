@@ -1,0 +1,19 @@
+# Core ML stack
+pandas
+numpy
+scikit-learn
+matplotlib
+joblib
+
+# UI
+streamlit
+
+# Notebooks & analysis
+jupyter
+jupyterlab
+ipykernel
+notebook
+ipywidgets
+
+# Dev utilities
+python-dotenv

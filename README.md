@@ -62,7 +62,7 @@ stroke-risk-prediction-ai/
 
 # Online Demo (Recommended for Recruiters)
 Live App:
-    https://your-app-link.streamlit.app
+    https://stroke-risk-prediction-ai.streamlit.app
 
 No installation required.
 Just open the link and use the interface.

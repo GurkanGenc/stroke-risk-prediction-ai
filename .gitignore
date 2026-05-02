@@ -16,3 +16,7 @@ Thumbs.db
 
 # IDE / Editor settings
 .vscode/
+
+# Local Streamlit run logs
+streamlit.out.log
+streamlit.err.log

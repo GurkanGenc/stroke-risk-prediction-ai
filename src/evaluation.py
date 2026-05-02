@@ -1,23 +1,31 @@
+from typing import Dict
+
 import pandas as pd
-import numpy as np
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import (
-    accuracy_score,
-    classification_report,
-    confusion_matrix,
-)
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.pipeline import Pipeline
 
-def get_predictions(model: LogisticRegression, X_test: pd.DataFrame) -> np.ndarray:
-    """Generate predictions from the trained model."""
-    return model.predict(X_test)
 
-def evaluate_model(y_test: pd.Series, y_pred: np.ndarray) -> None:
-    """Evaluate model performance using standard classification metrics."""
+def evaluate_pipeline(
+    pipeline: Pipeline,
+    X_test: pd.DataFrame,
+    y_test: pd.Series,
+) -> Dict[str, object]:
+    """Evaluate a trained pipeline on raw test features."""
+    y_pred = pipeline.predict(X_test)
+    return {
+        "accuracy": accuracy_score(y_test, y_pred),
+        "confusion_matrix": confusion_matrix(y_test, y_pred),
+        "classification_report": classification_report(y_test, y_pred),
+    }
+
+
+def print_evaluation(metrics: Dict[str, object]) -> None:
+    """Print standard classification metrics."""
     print("Accuracy:")
-    print(accuracy_score(y_test, y_pred))
-    
+    print(metrics["accuracy"])
+
     print("\nConfusion Matrix:")
-    print(confusion_matrix(y_test, y_pred))
-    
+    print(metrics["confusion_matrix"])
+
     print("\nClassification Report:")
-    print(classification_report(y_test, y_pred))
+    print(metrics["classification_report"])

@@ -1,112 +1,92 @@
-# Stroke Prediction – ML Project
+# Stroke Risk Prediction AI
 
-This project explores a medical dataset to analyze factors related to stroke
-and builds a machine learning system for stroke risk prediction, including:
-
-- Data preprocessing pipeline
-
-- Machine learning model training
-
-- Model evaluation
-
-- Interactive web interface (UI) for predictions.
+This project trains and serves a stroke risk prediction model using one shared
+scikit-learn pipeline. The same saved pipeline handles preprocessing and
+prediction in both the training/evaluation scripts and the Streamlit UI.
 
 ## Tech Stack
+
 - Python
 - pandas
 - scikit-learn
-- matplotlib
 - Streamlit
+- joblib
 - Jupyter Notebook
 
 ## Dataset
-Medical dataset containing features such as:
-- age
-- gender
-- health indicators
-- lifestyle actors.
+
+The project uses the Kaggle Stroke Prediction Dataset by fedesoriano:
+https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset/data
 
 Target variable: `stroke`
 
-## Dataset Source
-The dataset was downloaded from Kaggle and is used for educational purposes only.
+## Project Structure
 
-Source: Stroke Prediction Dataset  
-Author: fedesoriano  
-Link: https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset/data
-
-# Project Structure
 ```text
 stroke-risk-prediction-ai/
-│
-├── data/
-│   └── healthcare-dataset-stroke-data.csv
-│
-├── src/
-│   ├── DataProcessing.py
-│   ├── model_training.py
-│   ├── evaluation.py
-│   ├── app.py
-│   ├── main.py
-│   └── models/
-│       ├── stroke_model.joblib
-│       └── feature_schema.joblib
-│
-├── notebooks/
-│   └── analysis.ipynb
-│
-├── requirements.txt
-├── README.md
-└── report.pdf
+|-- data/
+|   `-- healthcare-dataset-stroke-data.csv
+|-- notebooks/
+|   `-- analysis.ipynb
+|-- src/
+|   |-- app.py
+|   |-- config.py
+|   |-- data_processing.py
+|   |-- evaluation.py
+|   |-- main.py
+|   |-- model_training.py
+|   |-- pipeline.py
+|   `-- models/
+|       `-- stroke_prediction_pipeline.joblib
+|-- requirements.txt
+|-- requirements-dev.txt
+|-- README.md
+`-- report.pdf
 ```
 
-# Online Demo (Recommended for Recruiters)
-Live App:
-    https://stroke-risk-prediction-ai.streamlit.app
+## Module Responsibilities
 
-No installation required.
-Just open the link and use the interface.
+- `src/config.py`: shared paths, feature lists, target name, split settings.
+- `src/data_processing.py`: raw data loading and train/test splitting.
+- `src/pipeline.py`: single preprocessing-plus-model pipeline, save/load helpers,
+  and prediction helper.
+- `src/model_training.py`: train and save the production pipeline.
+- `src/evaluation.py`: evaluation metrics for a trained pipeline.
+- `src/main.py`: full train, save, and evaluate entry point.
+- `src/app.py`: Streamlit UI that loads and uses the saved pipeline.
 
-## How to Use the UI
-1. Open the application
-2. Enter patient information in the form
-3. Click Predict Stroke Risk
-4. View the prediction result
+## Run Locally
 
-The model will return a stroke risk prediction based on the trained machine learning model.
-
-⚠️ This application is for educational and demonstration purposes only.
-It is not a medical diagnostic tool.
-
-# Local Installation (For Developers / Technical Reviewers)
-1️⃣ Activate your virtual environment
-### Windows
+```powershell
 venv\Scripts\activate
-
-### macOS / Linux
-source venv/bin/activate
-
-2️⃣ Install dependencies
 pip install -r requirements.txt
+python src\main.py
+streamlit run src\app.py
+```
 
-3️⃣ Run the application
-streamlit run src/app.py
+## Single Pipeline Flow
 
-A browser window will automatically.
+```text
+raw CSV data
+-> data_processing.load_data
+-> data_processing.split_features_and_target
+-> pipeline.build_pipeline
+-> pipeline.fit
+-> pipeline.save_pipeline
+-> app.load_pipeline
+-> pipeline.predict_stroke_risk
+```
 
-# Machine Learning Pipeline
-- Raw Data  
-- Preprocessing  
-- Encoding  
-- Scaling  
-- Feature Engineering  
-- Model Training  
-- Model Evaluation  
-- Model Saving  
-- Inference via UI  
+The UI should not perform manual encoding, imputation, or scaling. Those steps
+belong inside `src/pipeline.py` so training and inference always use the same
+transformations.
 
-# Limitations
-- Educational dataset
-- Class imbalance in target variable
-- Simplified medical modeling
-- Not clinically validated
+## Online Demo
+
+Live App:
+https://stroke-risk-prediction-ai.streamlit.app
+
+## Disclaimer
+
+This application is for educational and demonstration purposes only. It is not
+a medical diagnostic tool.
